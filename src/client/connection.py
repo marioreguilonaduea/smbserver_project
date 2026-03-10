@@ -18,3 +18,10 @@ def crear_conexion():
     logging.info("Conexión SMB establecida correctamente")
 
     return conexion
+
+def cerrar_conexion(conexion):
+    """
+    Cierra la conexión SMB.
+    """
+    conexion.close()
+    logging.info("Conexión SMB cerrada")

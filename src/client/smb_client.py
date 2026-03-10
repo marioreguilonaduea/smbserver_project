@@ -11,7 +11,7 @@ y ver el contenido del share.
 
 import logging
 from src.shared.config import SHARE_NAME, DATA_DIR
-from src.client.connection import crear_conexion
+from src.client.connection import crear_conexion, cerrar_conexion
 from src.client.file_ops import listar_archivos, subir_archivo
 
 
@@ -30,8 +30,7 @@ def main():
 
     listar_archivos(conexion, SHARE_NAME)
 
-    conexion.close()
-    logging.info("Conexión SMB cerrada")
+    cerrar_conexion(conexion)
 
 
 if __name__ == "__main__":

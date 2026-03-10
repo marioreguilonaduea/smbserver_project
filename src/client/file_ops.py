@@ -21,11 +21,11 @@ def listar_archivos(conexion, share):
 
         logging.info(f"{tipo} | {nombre} | {tamanio} bytes | mtime: {fecha_mod}")
 
+
 def subir_archivo(conexion, share, archivo_local, archivo_remoto):
     """
     Sube un archivo local al share SMB.
     """
-
     logging.info(f"Subiendo archivo {archivo_local} al share {share} como {archivo_remoto}")
 
     with open(archivo_local, "rb") as f:

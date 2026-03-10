@@ -25,9 +25,7 @@ def iniciar_smb_funcional():
     Función que configura y arranca el servidor SMB.
     """
 
-    # ------------------------------------------------------------------
     # 1. Crear carpeta que actuará como disco compartido
-    # ------------------------------------------------------------------
 
     ruta_compartida = str(SHARE_PATH)
     os.makedirs(ruta_compartida, exist_ok=True)
@@ -35,31 +33,25 @@ def iniciar_smb_funcional():
     logging.info("Carpeta compartida creada o ya existente.")
     logging.info(f"Ruta local compartida: {ruta_compartida}")
 
-    # ------------------------------------------------------------------
     # 2. Crear servidor SMB
-    # ------------------------------------------------------------------
     # listenAddress = 0.0.0.0 significa que escuchará en todas las interfaces
     # listenPort = 445 es el puerto estándar de SMB
 
     server = SimpleSMBServer(listenAddress="0.0.0.0", listenPort=SERVER_PORT)
     logging.info(f"Servidor SMB configurado para escuchar en el puerto {SERVER_PORT}")
 
-    # ------------------------------------------------------------------
     # 3. Añadir recurso compartido
-    # ------------------------------------------------------------------
     # Creamos un share llamado "C$"
     # Esto simula el disco administrativo típico de Windows
+
     server.addShare(
         SHARE_NAME,        # Nombre del recurso compartido
         ruta_compartida,   # Carpeta local
         "Disco C Simulado" # Descripción
     )
-
     logging.info(f"Recurso compartido SMB creado: {SHARE_NAME}")
 
-    # ------------------------------------------------------------------
     # 4. Activar soporte SMB2 / SMB3
-    # ------------------------------------------------------------------
     # Muy importante para que funcione con sistemas modernos
 
     server.setSMB2Support(True)
@@ -72,10 +64,9 @@ def iniciar_smb_funcional():
     #
     # server.addCredential("administrador", "Simulacro2026", "DOMINIO_SIMULADO", "", "")
 
-    # ------------------------------------------------------------------
     # 6. Iniciar servidor
-    # ------------------------------------------------------------------
     # El servidor entra en un bucle infinito esperando conexiones SMB
+
     try:
         logging.info("Servidor SMB iniciado correctamente.")
         logging.info("Esperando conexiones...")
@@ -87,9 +78,6 @@ def iniciar_smb_funcional():
         logging.error("Puede que necesites ejecutar el script como administrador/root.")
 
 
-# ----------------------------------------------------------------------
-# Punto de entrada del script
-# ----------------------------------------------------------------------
 if __name__ == "__main__":
     iniciar_smb_funcional()
 

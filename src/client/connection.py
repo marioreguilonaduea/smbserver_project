@@ -11,7 +11,11 @@ def crear_conexion():
     """
     logging.info(f"Intentando conectar al servidor SMB {SERVER_IP}:{SERVER_PORT}")
 
-    conexion = SMBConnection(SERVER_IP, SERVER_IP, sess_port=SERVER_PORT)
+    conexion = SMBConnection(
+        remoteName=SERVER_IP,
+        remoteHost=SERVER_IP,
+        myName="CLIENT_SIMULATOR",
+        sess_port=SERVER_PORT)
 
     conexion.login("", "")
 

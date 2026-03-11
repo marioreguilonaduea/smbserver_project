@@ -17,7 +17,7 @@ def crear_conexion():
         myName="CLIENT_SIMULATOR",
         sess_port=SERVER_PORT)
 
-    conexion.login("", "")
+    conexion.login("", "")  # Login anónimo
 
     logging.info("Conexión SMB establecida correctamente")
 

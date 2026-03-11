@@ -26,7 +26,6 @@ def iniciar_smb_funcional():
     """
 
     # 1. Crear carpeta que actuará como disco compartido
-
     ruta_compartida = str(SHARE_PATH)
     os.makedirs(ruta_compartida, exist_ok=True)
 
@@ -36,14 +35,12 @@ def iniciar_smb_funcional():
     # 2. Crear servidor SMB
     # listenAddress = 0.0.0.0 significa que escuchará en todas las interfaces
     # listenPort = 445 es el puerto estándar de SMB
-
     server = SimpleSMBServer(listenAddress="0.0.0.0", listenPort=SERVER_PORT)
     logging.info(f"Servidor SMB configurado para escuchar en el puerto {SERVER_PORT}")
 
     # 3. Añadir recurso compartido
     # Creamos un share llamado "C$"
     # Esto simula el disco administrativo típico de Windows
-
     server.addShare(
         SHARE_NAME,        # Nombre del recurso compartido
         ruta_compartida,   # Carpeta local
@@ -53,20 +50,15 @@ def iniciar_smb_funcional():
 
     # 4. Activar soporte SMB2 / SMB3
     # Muy importante para que funcione con sistemas modernos
-
     server.setSMB2Support(True)
     logging.info("Soporte SMB2 activado")
 
-    # ------------------------------------------------------------------
     # 5. Autenticación (OPCIONAL)
-    # ------------------------------------------------------------------
     # Si se comenta esta línea el servidor acepta conexiones anónimas
-    #
-    # server.addCredential("administrador", "Simulacro2026", "DOMINIO_SIMULADO", "", "")
+    # server.addCredential("administrador", "Simulacro2026", "DOMINIO_SIMULADO", "")
 
     # 6. Iniciar servidor
     # El servidor entra en un bucle infinito esperando conexiones SMB
-
     try:
         logging.info("Servidor SMB iniciado correctamente.")
         logging.info("Esperando conexiones...")
